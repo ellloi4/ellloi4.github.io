@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Block Coder — Idle PWA</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Block Coder</h1>
+      <div id="auth">
+        <div id="auth-forms">
+          <input id="reg-username" placeholder="new username" />
+          <input id="reg-password" placeholder="password" type="password" />
+          <button id="btn-register">Register</button>
+          <hr />
+          <input id="login-username" placeholder="username" />
+          <input id="login-password" placeholder="password" type="password" />
+          <button id="btn-login">Login</button>
+        </div>
+
+        <div id="logged-in" style="display:none;">
+          <span id="who"></span>
+          <button id="btn-logout">Logout</button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="status-panel">
+        <div>Currency: <span id="currency">0</span> ⌾</div>
+        <div>Per tick: <span id="per-tick">0</span> ⌾</div>
+        <div><button id="btn-save">Save (manual)</button> <span id="save-status"></span></div>
+      </section>
+
+      <section id="game-area">
+        <div id="shop" class="panel">
+          <h2>Shop</h2>
+          <div id="shop-list"></div>
+        </div>
+
+        <div id="inventory" class="panel">
+          <h2>Inventory</h2>
+          <div id="owned-list"></div>
+        </div>
+
+        <div id="code" class="panel">
+          <h2>Program</h2>
+          <div id="sequence"></div>
+          <div class="hint">Click an owned block to append it to the program. Drag sequence items to rearrange (simple).</div>
+          <button id="btn-clear-program">Clear Program</button>
+        </div>
+      </section>
+
+      <section id="leaderboard-panel" class="panel">
+        <h2>Leaderboard</h2>
+        <ol id="leaderboard"></ol>
+      </section>
+    </main>
+
+    <footer>
+      <small>Works offline as a PWA. Auto-saves locally; log in to sync to your account.</small>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(e => console.warn('SW register failed', e));
+    }
+  </script>
+</body>
+</html>
